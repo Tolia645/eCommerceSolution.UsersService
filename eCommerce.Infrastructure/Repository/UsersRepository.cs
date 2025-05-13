@@ -19,7 +19,7 @@ public class UsersRepository : IUsersRepository
         user.UserId = Guid.NewGuid();
         
         // Sql query to insert user into db
-        string query = "INSERT INTO public.\"Users\"(\"UserId\", \"Email\", \"PersonName\", \"Gender\", \"Password\") VALUES (@UserId, @Email, @PersonName, @Gender, @Password);";
+        string query = "INSERT INTO public.\"Users\"(\"UserID\", \"Email\", \"PersonName\", \"Gender\", \"Password\") VALUES (@UserId, @Email, @PersonName, @Gender, @Password);";
 
         var rowCountAffected = await _context.DbConnection.ExecuteAsync(query, user);
 

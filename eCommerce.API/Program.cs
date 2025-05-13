@@ -9,6 +9,11 @@ using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel((context, options) =>
+{
+    options.Configure(context.Configuration.GetSection("Kestrel"));
+});
+
 //Add Services from class libraries
 builder.Services.AddInfrastructure();
 builder.Services.AddCoreServices();
