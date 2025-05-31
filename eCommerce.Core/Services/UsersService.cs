@@ -41,4 +41,10 @@ public class UsersService : IUsersService
         
         return _mapper.Map<AuthenticationResponse>(user) with {Success = true, Token = "Token"};
     }
+
+    public async Task<AppUserResponse?> GetUserByUserId(Guid userId)
+    {
+        AppUser? user = await _usersRepo.GetUserByUserIdAsync(userId);
+        return _mapper.Map<AppUserResponse>(user);
+    }
 }

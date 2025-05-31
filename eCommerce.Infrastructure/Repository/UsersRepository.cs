@@ -27,10 +27,7 @@ public class UsersRepository : IUsersRepository
         {
             return user;
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 
     public async Task<AppUser?> GetUserByEmailAndPasswordAsync(string? email, string? password)
@@ -41,5 +38,14 @@ public class UsersRepository : IUsersRepository
         AppUser? user = await _context.DbConnection.QueryFirstOrDefaultAsync<AppUser>(query, parameters);
         
         return user;
+    }
+
+    public async Task<AppUser?> GetUserByUserIdAsync(Guid userId)
+    {
+        string query = "SELECT * FROM public.\"Users\" WHERE \"UserId\" = @UserId;";
+        var parameters = new { UserId = userId };
+        
+        using var connection = _context.DbConnection;
+        return await connection.QueryFirstOrDefaultAsync(query, parameters);
     }
 }
